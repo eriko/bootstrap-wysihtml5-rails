@@ -15,6 +15,7 @@ Gem::Specification.new do |gem|
   gem.version       = BootstrapWysihtml5Rails::Rails::VERSION
 
   gem.add_dependency "railties", ">= 3.0"
+  gem.add_dependency "stache", ">=1.0.3"
   gem.add_development_dependency "bundler", ">= 1.0"
   gem.add_development_dependency "rake"
 end

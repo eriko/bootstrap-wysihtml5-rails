@@ -1,8 +1,8 @@
 #!/usr/bin/env rake
 require File.expand_path('../lib/bootstrap-wysihtml5-rails/version', __FILE__)
 
-ORIGIN_LIB_PATH = "bootstrap-wysihtml5/lib"
-ORIGIN_SRC_PATH = "bootstrap-wysihtml5/src"
+ORIGIN_LIB_PATH = "bootstrap-wysihtml5/dist"
+ORIGIN_SRC_PATH = "bootstrap-wysihtml5/dist"
 DEST_JAVASCRIPT_PATH = "vendor/assets/javascripts/bootstrap-wysihtml5"
 DEST_CSS_PATH = "vendor/assets/stylesheets/bootstrap-wysihtml5"
 
@@ -41,21 +41,21 @@ task 'update' do
   if Dir.exist?('bootstrap-wysihtml5')
     system("cd bootstrap-wysihtml5 && git pull && cd ..")
   else
-    system("git clone git://github.com/jhollingworth/bootstrap-wysihtml5.git bootstrap-wysihtml5")
+    system("git clone git@github.com:Waxolunist/bootstrap3-wysihtml5-bower.git bootstrap-wysihtml5")
     # system("cd bootstrap-wysihtml5 && git remote add b3 git@github.com:artillery/bootstrap-wysihtml5.git")
     # system("cd bootstrap-wysihtml5 && git fetch b3")
     # system("cd bootstrap-wysihtml5 && git checkout -b tb3 b3/master")
   end
 
-  Dir.foreach("bootstrap-wysihtml5/src/locales") do |file|
+  Dir.foreach("bootstrap-wysihtml5/dist/locales") do |file|
     unless file == '.' || file == '..'
       abbreviated_file_name = file.gsub('bootstrap-wysihtml5.', '')
       system("cp #{ORIGIN_SRC_PATH}/locales/#{file} #{DEST_JAVASCRIPT_PATH}/locales/#{abbreviated_file_name}")
     end
   end
 
-  system("cp #{ORIGIN_LIB_PATH}/js/wysihtml5-0.3.0.js #{DEST_JAVASCRIPT_PATH}/wysihtml5.js")
-  system("cp #{ORIGIN_LIB_PATH}/css/wysiwyg-color.css #{DEST_CSS_PATH}/wysiwyg-color.css")
+  system("cp #{ORIGIN_LIB_PATH}/bootstrap3-wysihtml5.min.js #{DEST_JAVASCRIPT_PATH}/wysihtml5.js")
+  system("cp #{ORIGIN_LIB_PATH}/bootstrap3-wysihtml5.css #{DEST_CSS_PATH}/wysiwyg-color.css")
 
   b2
   # b3
